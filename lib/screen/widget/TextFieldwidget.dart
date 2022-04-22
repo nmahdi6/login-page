@@ -6,18 +6,21 @@ class TextFieldWidget extends StatelessWidget {
   final bool obscureText;
   final suffixIcon;
   final FormFieldValidator<String>? validator;
+  final FormFieldValidator<String>? onSaved;
   TextFieldWidget(
       {required this.labelText,
       required this.icon,
       this.obscureText = false,
       this.suffixIcon,
-      this.validator});
+      this.validator,
+      this.onSaved});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: TextFormField(
         validator: validator,
+        onSaved: onSaved,
         style: const TextStyle(fontSize: 14, color: Colors.blue),
         obscureText: obscureText,
         decoration: InputDecoration(

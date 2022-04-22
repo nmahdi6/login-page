@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pruject_ui/screen/widget/TextFieldwidget.dart';
 import 'package:pruject_ui/screen/widget/buttonWidget.dart';
+import 'package:validators/validators.dart';
 
 void main() {
   runApp(MyApp());
@@ -8,6 +9,8 @@ void main() {
 
 class MyApp extends StatelessWidget {
   var _formKey = GlobalKey<FormState>();
+  var email;
+  var password;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -46,8 +49,19 @@ class MyApp extends StatelessWidget {
                 children: [
                   Container(
                       child: TextFieldWidget(
+                        onSaved: (String? value) {
+                          email = value;
+                        },
+
                     validator: (String? value) {
-                      return null;
+                      if(value!.isEmpty){
+                        return "Enter Email";
+                      }else if(!isEmail(value)){
+                        return "enter correct email";
+                      }
+                      else{
+                        return null;
+                      }
                     },
                     labelText: "Email",
                     icon: Icons.email_outlined,
@@ -55,6 +69,19 @@ class MyApp extends StatelessWidget {
                   Container(
                       margin: const EdgeInsets.only(top: 10),
                       child: TextFieldWidget(
+                        onSaved: (String? value) {
+                          password = value;
+                        },
+
+                        validator: ( value) {
+                          if(value!.isEmpty){
+                            return "enter password";
+                          }else if(value.length < 6){
+                            return "enter correct password";
+                          }else{
+                            return null;
+                          }
+                        },
                         labelText: "Password",
                         icon: Icons.lock_outline,
                         obscureText: true,
@@ -74,7 +101,10 @@ class MyApp extends StatelessWidget {
                         title: "Login",
                       ),
                       onTap: () {
-                        _formKey.currentState!.validate();
+                       if( _formKey.currentState!.validate()){
+                         _formKey.currentState!.save();
+                       }
+                        
                       },
                     ),
                   ),
