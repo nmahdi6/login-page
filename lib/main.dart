@@ -14,9 +14,24 @@ class MyApp extends StatelessWidget {
   var password;
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SafeArea(
+      theme: ThemeData(
+        inputDecorationTheme: InputDecorationTheme(
+        
+       // borderRadius: BorderRadius.circular(20),
+        
+      // BoxShadow(
+      //   color: Colors.grey.withOpacity(0.5),
+      //   spreadRadius: 0.3,
+      //   blurRadius: 1,
+      //   offset: const Offset(0, 2), // changes position of shadow
+      // ),
+    
+      
+        )
+      ),
+      home: const SafeArea(
         child: Scaffold(
           body: Login(),
         ),
